@@ -3,11 +3,13 @@ TODO:
 * Please refactor me
 * Ignore db directory and create migration?
 =end
-
+VERSION = "0.1"
 # usage
 if ARGV.size != 3
   puts <<-USAGE
-Refactoring application.
+script-refactor #{VERSION}
+
+Help refactoring application:
 * Renaming files with git, svn aware manner
 * Replacing class names, variable names as possible
 
