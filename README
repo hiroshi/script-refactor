@@ -1,13 +1,16 @@
-Script-refactor
+script/refactor
 ===============
 
-Introduction goes here.
+First of all, if you don't install this via:
 
+  script/plugin install git://github.com/hiroshi/script-refactor.git
 
-Example
-=======
+You may have no script/refactor. If so, do install.rb by hand:
 
-Example goes here.
+  ruby vendor/plugins/script-refactor/install.rb
 
+Next, just type:
 
-Copyright (c) 2009 [name of plugin creator], released under the MIT license
+  script/refactor
+
+You will see the usage and other information of the script.

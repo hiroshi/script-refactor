@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../vendor/plugins/script-refactor/lib/script_refactor'
