@@ -3,29 +3,33 @@ TODO:
 * Please refactor me
 * Ignore db directory and create migration?
 =end
-VERSION = "0.1"
+module Refactor
+  VERSION = "0.1"
+end
 # usage
 if ARGV.size != 3
   puts <<-USAGE
-script-refactor #{VERSION}
+script-refactor #{Refactor::VERSION}
 
 Help refactoring application:
 * Renaming files with git, svn aware manner
 * Replacing class names, variable names as possible
 
-THIS SCRIPT MAY DESTRACT FILES AND/OR DIRECTORIES. BE SURE YOUR CHANGES ARE COMMITED OR BACKED UP!
+THIS SCRIPT MAY DESTRUCT FILES AND/OR DIRECTORIES OF YOUR RAILS APPLICATION.
+BE SURE YOUR CHANGES ARE COMMITED OR BACKED UP!
 
 Usage: 
   #{$0} type from to
 
 Possible types:
-  resource: Replace resouce name, including file names.
+
+  resource: Replace resouce name.
 
 Examples:
   #{$0} resource user person
 
   USAGE
-  exit
+  exit 1
 end
 
 # main
