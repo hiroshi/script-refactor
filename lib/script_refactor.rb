@@ -43,6 +43,8 @@ when File.directory?(".git")
 when File.directory?(".svn")
   scm = :svn
   def rename_cmd(src, dst); "svn mv #{src} #{dst}"; end
+else
+  def rename_cmd(src, dst); "mv #{src} #{dst}"; end
 end
 
 renames = {
@@ -96,7 +98,7 @@ Find.find(".") do |path|
   end
 end
 
-puts "\nNOTE: If you want to revert them:"
+puts "\nNOTE: If you want to revert them:" if scm
 case scm
 when :git
   puts "  git reset --hard"
