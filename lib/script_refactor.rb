@@ -23,7 +23,9 @@ Usage:
 
 Possible types:
 
-  resource: Replace resouce name.
+  resource: Replace resource name.
+
+Supported SCM: git, svn
 
 Examples:
   #{$0} resource user person
