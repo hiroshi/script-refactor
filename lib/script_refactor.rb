@@ -87,7 +87,7 @@ puts "pettern: /#{pattern}/"
 puts ""
 
 Find.find(".") do |path|
-  Find.prune if path =~ /\/(vendor|log|script|tmp|\.(git|\.svn))$/
+  Find.prune if path =~ /\/(vendor|log|script|tmp|\.(git|svn))$/
 
   if File.file? path
     input = File.read(path)
