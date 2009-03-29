@@ -1,3 +1,5 @@
+require File.dirname(__FILE__) + '/rename_refactoring'
+
 =begin
 TODO:
 * Please refactor me
@@ -32,8 +34,6 @@ Examples:
   USAGE
   exit 1
 end
-
-require File.dirname(__FILE__) + '/util'
 
 # arguments
 type, from, to = ARGV
