@@ -2,9 +2,12 @@ require "find"
 require "rubygems"
 require "active_support"
 
+require File.dirname(__FILE__) + '/migration_generator'
+
 class RenameRefactoring
 
-  def initialize(from, to)
+  def initialize(rails_root, from, to)
+    @rails_root = rails_root
     @from = from
     @to = to
   end
@@ -78,7 +81,7 @@ class RenameRefactoring
 
     puts 'generating rename migration'
     migraton_generator = MigrationGenerator.new(@rails_root)
-    migraton_generator.generate_rename_table_migration(@from, @to)
+    migraton_generator.generate_rename_table_migration(@from.camelize, @to.camelize)
 
     puts "\nNOTE: If you want to revert them:" if scm
     case scm
