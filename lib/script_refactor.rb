@@ -37,5 +37,5 @@ end
 
 # arguments
 type, from, to = ARGV
-rename = RenameRefactoring.new(@from, @to)
+rename = RenameRefactoring.new(from, to)
 rename.apply
