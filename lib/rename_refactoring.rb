@@ -2,30 +2,34 @@ require "find"
 require "rubygems"
 require "active_support"
 
-class Util
+class RenameRefactoring
 
-  def self.apply_rename_refactoring(type, from, to)
- 
+  def initialize(from, to)
+    @from = from
+    @to = to
+  end
+
+  def apply
     # scm
     case
     when File.directory?(".git")
       scm = :git
-      def self.rename_cmd(src, dst); "git mv #{src} #{dst}"; end
+      def rename_cmd(src, dst); "git mv #{src} #{dst}"; end
     when File.directory?(".svn")
       scm = :svn
-      def self.rename_cmd(src, dst); "svn mv #{src} #{dst}"; end
+      def rename_cmd(src, dst); "svn mv #{src} #{dst}"; end
     else
-      def self.rename_cmd(src, dst); "mv #{src} #{dst}"; end
+      def rename_cmd(src, dst); "mv #{src} #{dst}"; end
     end
 
     renames = {
-      "test/unit/#{from}_test.rb" => "test/unit/#{to}_test.rb",
-      "test/functional/#{from.pluralize}_controller_test.rb" => "test/functional/#{to.pluralize}_controller_test.rb",
-      "test/fixtures/#{from.pluralize}.yml" => "test/fixtures/#{to.pluralize}.yml",
-      "app/views/#{from.pluralize}" => "app/views/#{to.pluralize}",
-      "app/models/#{from}.rb" => "app/models/#{to}.rb",
-      "app/helpers/#{from.pluralize}_helper.rb" => "app/helpers/#{to.pluralize}_helper.rb",
-      "app/controllers/#{from.pluralize}_controller.rb" => "app/controllers/#{to.pluralize}_controller.rb",
+      "test/unit/#{@from}_test.rb" => "test/unit/#{@to}_test.rb",
+      "test/functional/#{@from.pluralize}_controller_test.rb" => "test/functional/#{@to.pluralize}_controller_test.rb",
+      "test/fixtures/#{@from.pluralize}.yml" => "test/fixtures/#{@to.pluralize}.yml",
+      "app/views/#{@from.pluralize}" => "app/views/#{@to.pluralize}",
+      "app/models/#{@from}.rb" => "app/models/#{@to}.rb",
+      "app/helpers/#{@from.pluralize}_helper.rb" => "app/helpers/#{@to.pluralize}_helper.rb",
+      "app/controllers/#{@from.pluralize}_controller.rb" => "app/controllers/#{@to.pluralize}_controller.rb",
     }
 
     puts "Renaming files and directories:"
@@ -39,10 +43,10 @@ class Util
 
     puts "\nReplacing class and variables:"
     replaces = {
-      from => to,
-      from.classify => to.classify,
-      from.pluralize => to.pluralize,
-      from.classify.pluralize => to.classify.pluralize,
+      @from => @to,
+      @from.classify => @to.classify,
+      @from.pluralize => @to.pluralize,
+      @from.classify.pluralize => @to.classify.pluralize,
     }
     replaces.each do |f,t|
       puts "#{f} -> #{t}"
@@ -74,7 +78,7 @@ class Util
 
     puts 'generating rename migration'
     migraton_generator = MigrationGenerator.new(@rails_root)
-    migraton_generator.generate_rename_table_migration('from', 'to')
+    migraton_generator.generate_rename_table_migration(@from, @to)
 
     puts "\nNOTE: If you want to revert them:" if scm
     case scm

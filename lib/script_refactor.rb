@@ -1,7 +1,6 @@
 =begin
 TODO:
 * Please refactor me
-* Ignore db directory and create migration?
 =end
 module Refactor
   VERSION = "0.1"
@@ -38,4 +37,5 @@ require File.dirname(__FILE__) + '/util'
 
 # arguments
 type, from, to = ARGV
-Util.apply_rename_refactoring(type, from, to)
+rename = RenameRefactoring.new(@from, @to)
+rename.apply
