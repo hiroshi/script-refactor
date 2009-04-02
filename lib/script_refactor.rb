@@ -1,11 +1,7 @@
 require File.dirname(__FILE__) + '/rename_refactoring'
 
-=begin
-TODO:
-* Please refactor me
-=end
 module Refactor
-  VERSION = "0.1"
+  VERSION = "0.2"
 end
 # usage
 if ARGV.size != 3
@@ -13,8 +9,9 @@ if ARGV.size != 3
 script-refactor #{Refactor::VERSION}
 
 Help refactoring application:
-* Renaming files with git, svn aware manner
+* Renaming files with scm aware manner
 * Replacing class names, variable names as possible
+* Generate renaming migration file
 
 THIS SCRIPT MAY DESTRUCT FILES AND/OR DIRECTORIES OF YOUR RAILS APPLICATION.
 BE SURE YOUR CHANGES ARE COMMITED OR BACKED UP!

@@ -1,3 +1,4 @@
+*0.2*
 
 * Don't rewrite content to file being parsed if no matches were found in that file. [T.J. Sheehy] 02cb9c8
 * Skip the 'migrate' directory when renaming. Added code to generate a new migration instead. [T.J. Sheehy] 02cb9c8
