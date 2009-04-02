@@ -1,0 +1,6 @@
+
+* Support namespaced names (e.g. Admin::UsersController).
+* Support names of partials (their name start with "_").
+* Become a stand alone command like rake or cap (I fancy the name of the command, "rfactor"). This imply a gem, not a plugin.
+
+* A dryrun option.
