@@ -2,7 +2,7 @@ script/refactor
 ===============
 This plugin provides a simple script. It helps you refactor rails applications.
 Say, you have 'user' resource, and you want to change the name of the resource to 'person',
-the script replaces name of files, directories, constants, variables and so force.
+the script replaces name of files, directories, constants, variables and so forth.
 
 == INSTALL
 First of all, if you don't install this via:
