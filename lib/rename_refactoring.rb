@@ -58,7 +58,8 @@ class RenameRefactoring
     puts "pattern: /#{pattern}/"
 
     Find.find(".") do |path|
-      Find.prune if path =~ /\/(vendor|log|script|tmp|migrate|\.(git|svn))$/
+      # reject no source codes directories and SCM magic directories
+      Find.prune if path =~ /((^\.\/(vendor|log|script|tmp|db))|\.(git|svn))$/
 
       if File.file? path
         content = File.read(path)
