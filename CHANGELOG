@@ -1,3 +1,8 @@
+*0.3*
+
+* Added --skip-migration option (for early stages of development) [Hiroshi Saito]
+* Skip 'db' directory, not only 'migration' (should not touch *.sqlite3 nor schema.rb) [Hiroshi Saito]
+
 *0.2*
 
 * Don't rewrite content to file being parsed if no matches were found in that file. [T.J. Sheehy] 02cb9c8

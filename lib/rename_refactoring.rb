@@ -12,7 +12,7 @@ class RenameRefactoring
     @to = to
   end
 
-  def apply
+  def apply(options={})
     # scm
     case
     when File.directory?(".git")
@@ -80,9 +80,13 @@ class RenameRefactoring
       end
     end
 
-    puts 'generating rename migration'
-    migraton_generator = MigrationGenerator.new(@rails_root)
-    migraton_generator.generate_rename_table_migration(@from.camelize, @to.camelize)
+    unless options[:skip_migration]
+      puts 'generating rename migration'
+      migraton_generator = MigrationGenerator.new(@rails_root)
+      migraton_generator.generate_rename_table_migration(@from.camelize, @to.camelize)
+    else
+      puts 'SKIP: generating rename migration'
+    end
 
     puts "\nNOTE: If you want to revert them:" if scm
     case scm

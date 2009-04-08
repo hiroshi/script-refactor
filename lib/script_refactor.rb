@@ -1,38 +1,46 @@
+require 'optparse'
 require File.dirname(__FILE__) + '/rename_refactoring'
 
-module Refactor
-  VERSION = "0.2"
-end
-# usage
-if ARGV.size != 3
-  puts <<-USAGE
-script-refactor #{Refactor::VERSION}
+# == parse command line arguments
+options = {}
+opts = OptionParser.new do |opts|
+  opts.set_summary_indent('  ')
+  opts.program_name = "script/refactor"
+  opts.version = "0.3"
+  opts.banner = "Usage: #{opts.program_name} [OPTIONS] type from to"
+  opts.on_head <<-HEAD
 
-Help refactoring application:
+Help rails application refactoring:
 * Renaming files with scm aware manner
 * Replacing class names, variable names as possible
 * Generate renaming migration file
 
 THIS SCRIPT MAY DESTRUCT FILES AND/OR DIRECTORIES OF YOUR RAILS APPLICATION.
 BE SURE YOUR CHANGES ARE COMMITED OR BACKED UP!
-
-Usage: 
-  #{$0} type from to
-
-Possible types:
-
-  resource: Replace resource name.
-
-Supported SCM: git, svn
-
-Examples:
-  #{$0} resource user person
-
-  USAGE
-  exit 1
+  HEAD
+  opts.separator "Possible types:"
+  opts.separator "  resource: Replace resource name."
+  opts.separator ""
+  opts.separator "Supported SCM: git, svn"
+  opts.separator ""
+  opts.separator "OPTIONS:"
+  opts.on("--skip-migration", "Don't generate table renaming migration files") {|v| options[:skip_migration] = v }
+  opts.separator ""
+  opts.separator "Examples:"
+  opts.separator "  #{opts.program_name} resource user person"
 end
 
-# arguments
+begin
+  opts.parse!
+rescue OptionParser::InvalidOption
+end
+
+if ARGV.size != 3
+  puts opts
+  exit 1
+end
 type, from, to = ARGV
+
+#== do
 rename = RenameRefactoring.new(File.expand_path('.'), from, to)
-rename.apply
+rename.apply(options)
